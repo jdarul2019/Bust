@@ -1,0 +1,34 @@
+# To są foldery tymczasowe generowane przez Unity. NIE WYSYŁAMY ICH!
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uilds/
+/[Bb]uild/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+
+# Ignorujemy pliki cache i wygenerowane pliki kodu
+MemoryCaptures/
+/[Aa]ssets/AssetStoreTools*
+/[Ll]ocal[Ss]ettings.json
+
+# Pliki projektów Visual Studio (każdy koder ma swoje własne)
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Ignorujemy ukryte pliki systemowe (np. z Maca lub Windowsa)
+.DS_Store
+Thumbs.db
+Desktop.ini
