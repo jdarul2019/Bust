@@ -12,6 +12,10 @@ public class CoinflipGame : MonoBehaviour
     public Button btnTails;     // Przycisk "Reszka"
     public Button btnFlip;      // Przycisk "Rzuć"
     public TextMeshProUGUI resultText; // Tekst wyświetlający wynik/status
+    
+    [Header("Ruch Monety na Canvasie")]
+    public RectTransform dropZone;
+    public RectTransform coinTransform;
 
     [Header("Grafiki Monety (Opcjonalne)")]
     public Image coinImage;     // Komponent Image wyświetlający monetę
@@ -142,6 +146,17 @@ public class CoinflipGame : MonoBehaviour
         // Daje to potem miejsce grafikowi na dołączenie ładnej animacji kręcącej się monety!
         yield return new WaitForSeconds(2f);
 
+        if (dropZone != null && coinTransform != null)
+        {
+            float szerokosc = dropZone.rect.width;
+            float wysokosc = dropZone.rect.height;
+        
+            float losoweX = Random.Range(-szerokosc / 2f, szerokosc / 2f);
+            float losoweY = Random.Range(-wysokosc / 2f, wysokosc / 2f);
+        
+            coinTransform.anchoredPosition = new Vector2(losoweX, losoweY);
+        }
+
         // Losowanko: 0 to Orzeł (Heads), 1 to Reszka (Tails)
         int randomResult = Random.Range(0, 2);
         CoinSide flippedSide = (randomResult == 0) ? CoinSide.Heads : CoinSide.Tails;
@@ -190,5 +205,26 @@ public class CoinflipGame : MonoBehaviour
         
         // Ukrywamy cały Canvas/Panel z grą
         gameObject.SetActive(false);
+    }
+}
+public class CoinMover : MonoBehaviour
+{
+    public RectTransform strefaZrzutu;
+    public RectTransform moneta;
+
+    // Tę funkcję Koder odpali w momencie "rzutu"
+    public void WylosujMiejsceLadowania()
+    {
+        // 1. Sprawdzamy, jak szerokie i wysokie jest Twoje niewidzialne pudełko
+        float szerokosc = strefaZrzutu.rect.width;
+        float wysokosc = strefaZrzutu.rect.height;
+
+        // 2. Losujemy pozycję X oraz Y. 
+        // Skoro (0,0) to idealny środek pudełka, losujemy od minus połowy do plus połowy szerokości/wysokości!
+        float losoweX = Random.Range(-szerokosc / 2f, szerokosc / 2f);
+        float losoweY = Random.Range(-wysokosc / 2f, wysokosc / 2f);
+
+        // 3. Teleportujemy monetę w wylosowane miejsce
+        moneta.anchoredPosition = new Vector2(losoweX, losoweY);
     }
 }
