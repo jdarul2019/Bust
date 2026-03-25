@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     
     // 1. Dodajemy zmienną dla Animatora
     private Animator anim; 
+    
+    // Globalna flaga pozwalająca włączać/wyłączać ruch z każdego innego skryptu na scenie
+    public static bool canMove = true;
 
     void Start()
     {
@@ -20,6 +23,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Jeśli ruch jest zablokowany, np. przez otwarte okno minigry
+        if (!canMove)
+        {
+            // Natychmiastowe zerowanie pędu gracza (nie jedzie dalej jak po lodzie) i wymuszenie animacji stania
+            movement = Vector2.zero;
+            if (anim != null) anim.SetBool("isMoving", false);
+            return; // Przerwanie czytania przycisków
+        }
+
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 

@@ -26,6 +26,9 @@ public class CoinflipGame : MonoBehaviour
     public TMP_InputField betInput; // Pole tekstowe do ręcznego wpisywania kwoty
     private int currentBet = 0;     // Zmienna w tle trzymająca obecny zakład
 
+    [Header("Koszty Gry")]
+    public int energyCost = 1;      // Możesz zmienić koszt zagrania w ten automat (np. 1 albo 5)!
+
     private CoinSide selectedSide = CoinSide.None;
     private bool isFlipping = false;
 
@@ -44,6 +47,22 @@ public class CoinflipGame : MonoBehaviour
             // Dodanie listenera (nasłuchiwania), aby zmienna aktualizowała się, gdy gracz coś wpisze z klawiatury
             betInput.onValueChanged.AddListener(OnBetInputChanged);
             betInput.text = "0"; // Startowa wartość
+        }
+    }
+
+    // ++ FUNKCJA DO RESETOWANIA ZAKŁADU (KASOWANIA Z INPUTA) ++
+    // Podepnij pod guzik usuwający kwotę, np. "Wyczyść" lub pomniejszony znak X
+    public void ClearBet()
+    {
+        // Jeśli rzucamy w tej chwili monetą, nie chcemy pozwolić na psucie zmiennych
+        if (isFlipping) return;
+
+        currentBet = 0; // zerujemy wynik logiki gry
+
+        // Zerujemy również tekst, co naturalnie wywoła automatycznie OnBetInputChanged w tle
+        if (betInput != null)
+        {
+            betInput.text = "0";
         }
     }
 
@@ -118,10 +137,21 @@ public class CoinflipGame : MonoBehaviour
             return; // Przerwij dalsze działanie - gracz nie pociągnie za wajchę
         }
 
+        // ++ ZABEZPIECZENIE: Próba pobrania ENERGII przez EnergyManager
+        if (EnergyManager.Instance != null && !EnergyManager.Instance.SpendEnergy(energyCost))
+        {
+            if (resultText != null) resultText.text = "Brak sił na zagranie! \n<size=50%>(Koszt: " + energyCost + " En.)</size>";
+            return; // Przerwij - brakuje energii
+        }
+
         // ++ ZABEZPIECZENIE: Próba pobrania pieniędzy przez MoneyManager
         // "SpendMoney" zwraca true (jeśli się udało obciążyć konto) lub false (jeśli nie miał środków)
         if (MoneyManager.Instance == null || !MoneyManager.Instance.SpendMoney(currentBet))
         {
+            // Gracz stracił już co prawda punkt energii z 3 linijki wyżej żeby kliknąć maszynę,
+            // ale jeśli chcesz to oddać po odkryciu biedy:
+            // if (EnergyManager.Instance != null) EnergyManager.Instance.AddEnergy(energyCost);
+            
             if (resultText != null) resultText.text = "Brak środków na ten zakład!";
             return; // Przerwij - brakuje kasy
         }
@@ -197,6 +227,9 @@ public class CoinflipGame : MonoBehaviour
     {
         // Jeśli dodasz przycisk "Wyjdź", blokujemy wyjście w trakcie losowania
         if (isFlipping) return;
+
+        // ++ Odblokowanie ruchu gracza ++
+        PlayerMovement.canMove = true;
 
         // Resetowanie stanu ekranu przed kolejnym wejściem
         selectedSide = CoinSide.None;

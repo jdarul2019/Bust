@@ -35,11 +35,9 @@ public class MoneyUI : MonoBehaviour
     {
         if (moneyText != null)
         {
-            // Aktualizowanie wartości w Canvasie. 
-            moneyText.text = newBalance.ToString(); 
-
-            // Przykładowo, jeśli byś chciał w tym miejscu też np. "100 $" zostawiasz ten kod poniżej:
-            // moneyText.text = newBalance.ToString() + " $";
+            // Opcja "D8" (Decimal 8) w C# zmusza system do wypisania liczby na równe 8 znaków.
+            // Jeśli będzie brakować, wypełni je zerami z przodu!
+            moneyText.text = newBalance.ToString("D8"); 
         }
     }
 }

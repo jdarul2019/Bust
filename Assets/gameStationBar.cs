@@ -29,6 +29,9 @@ public class GameStation : MonoBehaviour
             if (minigameUI != null)
             {
                 minigameUI.SetActive(true);
+                
+                // ++ Mrozimy postać (Brak poruszanki w UI) ++
+                PlayerMovement.canMove = false;
             }
         }
     }
