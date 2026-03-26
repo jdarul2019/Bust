@@ -29,6 +29,9 @@ public class CoinflipGame : MonoBehaviour
     [Header("Koszty Gry")]
     public int energyCost = 1;      // Możesz zmienić koszt zagrania w ten automat (np. 1 albo 5)!
 
+    [Header("Instruction Panel")]
+    public GameObject instructionPanel;
+
     private CoinSide selectedSide = CoinSide.None;
     private bool isFlipping = false;
 
@@ -170,7 +173,7 @@ public class CoinflipGame : MonoBehaviour
         if (btnTails != null) btnTails.interactable = false;
         if (btnFlip != null) btnFlip.interactable = false;
 
-        if (resultText != null) resultText.text = "Trwa losowanie monety...";
+        if (resultText != null) resultText.text = "Flipping coin...";
 
         // Odczekanie 2 sekund - według Twoich instrukcji.
         // Daje to potem miejsce grafikowi na dołączenie ładnej animacji kręcącej się monety!
@@ -222,21 +225,30 @@ public class CoinflipGame : MonoBehaviour
         selectedSide = CoinSide.None;
     }
 
+    // ============================================
+    // INSTRUKCJA GRY (?)
+    // ============================================
+    public void OpenInstruction()
+    {
+        if (isFlipping) return;
+        if (instructionPanel != null) instructionPanel.SetActive(true);
+    }
+
+    public void CloseInstruction()
+    {
+        if (instructionPanel != null) instructionPanel.SetActive(false);
+    }
+
     // Funkcja do wyjścia z mini-gry
     public void ExitMinigame()
     {
-        // Jeśli dodasz przycisk "Wyjdź", blokujemy wyjście w trakcie losowania
         if (isFlipping) return;
 
-        // ++ Odblokowanie ruchu gracza ++
         PlayerMovement.canMove = true;
-
-        // Resetowanie stanu ekranu przed kolejnym wejściem
         selectedSide = CoinSide.None;
         if (btnFlip != null) btnFlip.interactable = false;
-        if (resultText != null) resultText.text = "Wybierz Orła lub Reszkę.";
-        
-        // Ukrywamy cały Canvas/Panel z grą
+        if (resultText != null) resultText.text = "Place your bet...";
+        CloseInstruction();
         gameObject.SetActive(false);
     }
 }
