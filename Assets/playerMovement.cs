@@ -35,8 +35,8 @@ public class PlayerMovement : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (movement.x < 0) spriteRenderer.flipX = true;
-        else if (movement.x > 0) spriteRenderer.flipX = false;
+        if (movement.x > 0) spriteRenderer.flipX = true;
+        else if (movement.x < 0) spriteRenderer.flipX = false;
 
         // 3. Sprawdzamy, czy gracz się rusza (w lewo/prawo lub góra/dół)
         if (movement.x != 0 || movement.y != 0)

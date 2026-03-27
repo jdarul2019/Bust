@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cd65f047fb0838469a39906ebb7f0e5
-      internalID: 1037594102
+      spriteID: 55cc42ab3b8566e479a7a6a695c48aed
+      internalID: -736305840
       vertices: []
       indices: 
       edges: []
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd1e1884fa1e1314ea89e4cf78a9fca0
-      internalID: 563268850
+      spriteID: f85ddf38c09123f49951848366a3dc4a
+      internalID: 263653812
       vertices: []
       indices: 
       edges: []
@@ -194,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52690d18084717f4da58831c9505d935
-      internalID: -934444775
+      spriteID: 154eee4dc8c34d442abbdf6d14dc194d
+      internalID: -87568846
       vertices: []
       indices: 
       edges: []
@@ -216,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25ba46aa781f46a4db3c95a52f0fdca5
-      internalID: 488543894
+      spriteID: de97e273a2a5d994ba4791d4bb263429
+      internalID: 1884100551
       vertices: []
       indices: 
       edges: []
@@ -238,8 +238,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9274fd927d6451546a7f53662adc8aae
-      internalID: 258222702
+      spriteID: 9aba35feade1f734ba6ef6e6fafbc6b4
+      internalID: -643982041
       vertices: []
       indices: 
       edges: []
@@ -260,8 +260,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7e6cc5ad406ab740b8bea8df702c0a2
-      internalID: 1546393819
+      spriteID: 43349549acdc394478d824dbe5b5308b
+      internalID: -682660861
       vertices: []
       indices: 
       edges: []
@@ -282,8 +282,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0634705c6a4f87548873f8e87dee0d20
-      internalID: -635457639
+      spriteID: dc0136c2db575f24ba8fdd9c6f62803c
+      internalID: -1981265323
       vertices: []
       indices: 
       edges: []
@@ -292,7 +292,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cba385084b3fccb4d8ba5c1bc8585aa2
+    spriteID: 68069185377a8104ea3b0de9ba763a19
     internalID: 0
     vertices: []
     indices: 
@@ -302,16 +302,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":8.0,"y":1.0},"gridSpriteSize":{"x":82.0,"y":132.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":82.0,"y":132.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       jackpotIcons_0: 4371370908613255536
-      jackpotIcons_1: 1037594102
-      jackpotIcons_2: 563268850
-      jackpotIcons_3: -934444775
-      jackpotIcons_4: 488543894
-      jackpotIcons_5: 258222702
-      jackpotIcons_6: 1546393819
-      jackpotIcons_7: -635457639
+      jackpotIcons_1: -736305840
+      jackpotIcons_2: 263653812
+      jackpotIcons_3: -87568846
+      jackpotIcons_4: 1884100551
+      jackpotIcons_5: -643982041
+      jackpotIcons_6: -682660861
+      jackpotIcons_7: -1981265323
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
