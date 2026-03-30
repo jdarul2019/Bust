@@ -29,6 +29,21 @@ TextureImporter:
   - first:
       213: -7044848270624854865
     second: roomProps_8
+  - first:
+      213: 1087398362265569080
+    second: roomProps_9
+  - first:
+      213: -611054377390568262
+    second: roomProps_10
+  - first:
+      213: -7550741241087403063
+    second: roomProps_11
+  - first:
+      213: -8211293092093781735
+    second: roomProps_12
+  - first:
+      213: 3113110417314914455
+    second: roomProps_13
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -203,13 +218,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plant
+      name: jacket
       rect:
         serializedVersion: 2
-        x: 12
-        y: 115
-        width: 19
-        height: 27
+        x: 107
+        y: 171
+        width: 30
+        height: 26
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,13 +240,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: desk
+      name: deskchair
       rect:
         serializedVersion: 2
-        x: 47
-        y: 123
+        x: 149
+        y: 169
         width: 18
-        height: 50
+        height: 30
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,6 +257,72 @@ TextureImporter:
       bones: []
       spriteID: cfbfb8d4c3b70a890800000000000000
       internalID: -7448818284741526532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stool
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 111
+        width: 17
+        height: 27
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b52e313b446e06d0800000000000000
+      internalID: -3022368025807542855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clock
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 110
+        width: 11
+        height: 12
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1e254a8c75580ec0800000000000000
+      internalID: -3600533908698616289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: roomProps_7
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 123
+        width: 18
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e89a9f57b59b9d40800000000000000
+      internalID: 5592227977126123745
       vertices: []
       indices: 
       edges: []
@@ -262,20 +343,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9b52e313b446e06d0800000000000000
-      internalID: -3022368025807542855
+      spriteID: fac61e4b2dbab3e90800000000000000
+      internalID: -7044848270624854865
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: stool
+      name: plantbig
       rect:
         serializedVersion: 2
-        x: 9
-        y: 78
-        width: 17
-        height: 27
+        x: 130
+        y: 102
+        width: 38
+        height: 65
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +365,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f1e254a8c75580ec0800000000000000
-      internalID: -3600533908698616289
+      spriteID: 8374e289c07371f00800000000000000
+      internalID: 1087398362265569080
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: clock
+      name: table
       rect:
         serializedVersion: 2
-        x: 34
-        y: 91
-        width: 11
-        height: 12
+        x: 4
+        y: 70
+        width: 30
+        height: 23
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -306,8 +387,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1e89a9f57b59b9d40800000000000000
-      internalID: 5592227977126123745
+      spriteID: abc003108491587f0800000000000000
+      internalID: -611054377390568262
       vertices: []
       indices: 
       edges: []
@@ -328,8 +409,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fac61e4b2dbab3e90800000000000000
-      internalID: -7044848270624854865
+      spriteID: 9cbd716c8d0663790800000000000000
+      internalID: -7550741241087403063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plantsmall
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 88
+        width: 18
+        height: 30
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91991232070ab0e80800000000000000
+      internalID: -8211293092093781735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chair
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 60
+        width: 30
+        height: 26
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 790af9a3e6df33b20800000000000000
+      internalID: 3113110417314914455
       vertices: []
       indices: 
       edges: []
@@ -338,7 +463,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4a23b44c0e95bc342a182be6a1942cab
+    spriteID: 1feb66be49408d043aa2443b5c5afbad
     internalID: 0
     vertices: []
     indices: 
@@ -349,13 +474,18 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       bed: 7535338180034765834
-      clock: 5592227977126123745
-      dart: -3022368025807542855
-      desk: -7448818284741526532
-      lamp: -7044848270624854865
-      plant: -4143616290512072957
+      chair: 3113110417314914455
+      clock: -3600533908698616289
+      dart: -7044848270624854865
+      deskchair: -7448818284741526532
+      jacket: -4143616290512072957
+      lamp: -7550741241087403063
+      plantbig: 1087398362265569080
+      plantsmall: -8211293092093781735
+      roomProps_7: 5592227977126123745
       rug: 260513686263368096
-      stool: -3600533908698616289
+      stool: -3022368025807542855
+      table: -611054377390568262
       window: 400690290430007158
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
