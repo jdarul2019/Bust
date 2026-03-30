@@ -40,7 +40,7 @@ public class CoinflipGame : MonoBehaviour
     {
         // Przycisk rzutu na początku jest nieaktywny, póki nie wybierzemy strony monety
         if (btnFlip != null) btnFlip.interactable = false; 
-        if (resultText != null) resultText.text = "Wybierz Orła lub Reszkę.";
+        if (resultText != null) resultText.text = "Choose Heads or Tails.";
 
         // Konfiguracja Input Fielda
         if (betInput != null)
@@ -120,8 +120,8 @@ public class CoinflipGame : MonoBehaviour
     {
         if (resultText != null)
         {
-            string strSide = (selectedSide == CoinSide.Heads) ? "Orzeł" : "Reszka";
-            resultText.text = "Wybrano: " + strSide + ". Naciśnij Rzuć!";
+            string strSide = (selectedSide == CoinSide.Heads) ? "Heads" : "Tails";
+            resultText.text = "Selected: " + strSide + ". Press Flip!";
         }
         
         if (btnFlip != null) btnFlip.interactable = true;
@@ -136,14 +136,14 @@ public class CoinflipGame : MonoBehaviour
         // ++ ZABEZPIECZENIE: Sprawdzamy czy zakład jest większy od zera
         if (currentBet <= 0)
         {
-            if (resultText != null) resultText.text = "Musisz postawić jakąś kwotę!";
+            if (resultText != null) resultText.text = "You must place a bet first!";
             return; // Przerwij dalsze działanie - gracz nie pociągnie za wajchę
         }
 
         // ++ ZABEZPIECZENIE: Próba pobrania ENERGII przez EnergyManager
         if (EnergyManager.Instance != null && !EnergyManager.Instance.SpendEnergy(energyCost))
         {
-            if (resultText != null) resultText.text = "Brak sił na zagranie! \n<size=50%>(Koszt: " + energyCost + " En.)</size>";
+            if (resultText != null) resultText.text = "Not enough energy! \n<size=50%>(Cost: " + energyCost + " En.)</size>";
             return; // Przerwij - brakuje energii
         }
 
@@ -155,7 +155,7 @@ public class CoinflipGame : MonoBehaviour
             // ale jeśli chcesz to oddać po odkryciu biedy:
             // if (EnergyManager.Instance != null) EnergyManager.Instance.AddEnergy(energyCost);
             
-            if (resultText != null) resultText.text = "Brak środków na ten zakład!";
+            if (resultText != null) resultText.text = "Not enough money for this bet!";
             return; // Przerwij - brakuje kasy
         }
 
@@ -193,7 +193,7 @@ public class CoinflipGame : MonoBehaviour
         // Losowanko: 0 to Orzeł (Heads), 1 to Reszka (Tails)
         int randomResult = Random.Range(0, 2);
         CoinSide flippedSide = (randomResult == 0) ? CoinSide.Heads : CoinSide.Tails;
-        string flippedSideName = (flippedSide == CoinSide.Heads) ? "Orzeł" : "Reszka";
+        string flippedSideName = (flippedSide == CoinSide.Heads) ? "Heads" : "Tails";
 
         // Zmiana grafiki (obrazka) monety w zależności od tego, co wypadło
         if (coinImage != null)
@@ -209,11 +209,11 @@ public class CoinflipGame : MonoBehaviour
             // Wypłacamy nagrodę do portfela
             if (MoneyManager.Instance != null) MoneyManager.Instance.AddMoney(winnings);
             
-            if (resultText != null) resultText.text = "Wylosowano: <color=green>" + flippedSideName + "</color>.\nWYGRYWASZ " + winnings + " $!";
+            if (resultText != null) resultText.text = "Result: <color=green>" + flippedSideName + "</color>.\nYOU WIN " + winnings + " $!";
         }
         else
         {
-            if (resultText != null) resultText.text = "Wylosowano: <color=red>" + flippedSideName + "</color>.\nPRZEGRYWASZ " + currentGameBet + " $...";
+            if (resultText != null) resultText.text = "Result: <color=red>" + flippedSideName + "</color>.\nYOU LOSE " + currentGameBet + " $...";
         }
 
         // Odblokowanie przycisków po zakończeniu losowania do kolejnej gry

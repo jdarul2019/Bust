@@ -61,9 +61,16 @@ public class TravelMenu : MonoBehaviour
     // Przycisk "X" / Zamknij
     public void CloseMenu()
     {
+        // Zawsze przywróć ruch
+        PlayerMovement.canMove = true;
+
+        // Jeśli nie podpięto ręcznie — znajdź automatycznie w scenie
+        if (doorTrigger == null)
+            doorTrigger = FindObjectOfType<DoorTrigger>();
+
         if (doorTrigger != null)
-            doorTrigger.CloseMenu();
+            doorTrigger.CloseMenu(); // DoorTrigger zadba o dymek i stan menuOpen
         else
-            gameObject.SetActive(false);
+            gameObject.SetActive(false); // ostateczny fallback
     }
 }

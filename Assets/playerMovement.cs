@@ -17,8 +17,11 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        // 2. Pobieramy Animatora
         anim = GetComponent<Animator>(); 
+
+        // Reset ruchu przy każdym załadowaniu sceny —
+        // static persystuje między scenami więc wymuszamy świeży start
+        canMove = true;
     }
 
     void Update()
