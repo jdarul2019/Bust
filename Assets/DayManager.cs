@@ -1,0 +1,107 @@
+using System.Collections;
+using UnityEngine;
+using TMPro;
+
+public class DayManager : MonoBehaviour
+{
+    public static DayManager Instance { get; private set; }
+
+    // Zmienne UI usunięte z poziomu managera, obiekty lokalne sceny będą zlecane do Managera przez Łóżko
+
+    [Header("Transition Settings")]
+    public float showScreenDuration = 3f;
+
+    private int currentDay = 1;
+    private int moneyAtStartOfDay = 0;
+    private bool isTransitioning = false;
+
+    private void Awake()
+    {
+        // Wzorzec Singleton do zarządzania nockami
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator Start()
+    {
+        // Czekamy ułamek klatki, żeby MoneyManager zdążył załadować budżet początkowy gracza
+        yield return new WaitForEndOfFrame();
+        
+        if (MoneyManager.Instance != null)
+        {
+            moneyAtStartOfDay = MoneyManager.Instance.GetBalance();
+        }
+    }
+
+    public void FinishDay(GameObject panel, TextMeshProUGUI txtDay, TextMeshProUGUI txtProfit)
+    {
+        if (isTransitioning) return;
+        StartCoroutine(EndDayRoutine(panel, txtDay, txtProfit));
+    }
+
+    private IEnumerator EndDayRoutine(GameObject endOfDayPanel, TextMeshProUGUI dayText, TextMeshProUGUI profitText)
+    {
+        isTransitioning = true;
+        PlayerMovement.canMove = false; // Blokuje ruch gracza (pauza animacji chodzenia postaci obok domku)
+
+        // Wyliczenia zysków 
+        int currentMoney = 0;
+        if (MoneyManager.Instance != null) currentMoney = MoneyManager.Instance.GetBalance();
+        
+        int profit = currentMoney - moneyAtStartOfDay;
+
+        // Ustawianie tekstów na UI - Numer Dnia
+        if (dayText != null)
+        {
+            dayText.text = "Day " + currentDay + " Finished";
+        }
+
+        // Ustawianie utargu - kolorowanie zielono/czerwono
+        if (profitText != null)
+        {
+            if (profit > 0)
+            {
+                profitText.text = "Profit: <color=green>+$" + profit + "</color>";
+            }
+            else if (profit < 0)
+            {
+                profitText.text = "Profit: <color=red>-$" + Mathf.Abs(profit) + "</color>";
+            }
+            else
+            {
+                profitText.text = "Profit: <color=white>$0</color>"; // Remis - wyszliśmy na zero!
+            }
+        }
+
+        // Pokaż UI ekranu podsumowania i wycisz ekran
+        if (endOfDayPanel != null) endOfDayPanel.SetActive(true);
+
+        // Miejsce do rozbudowy w przyszłości: można podpiąć Animator i Fade-To-Black tuła.
+
+        // Odczekaj podany czas wyświetlając ekran (aby gracz mógł się mu rzetelnie przyjrzeć uff)
+        yield return new WaitForSeconds(showScreenDuration);
+
+        // Śpimy: Resetowanie energii po nocy do totalnego punktu pod korek
+        if (EnergyManager.Instance != null)
+        {
+            int maxEnergy = EnergyManager.Instance.GetMaxEnergy();
+            EnergyManager.Instance.AddEnergy(maxEnergy); // Skrypt z energii samoistnie pilnuje obcięcia przy szczytowych wartościach
+        }
+
+        // --- Zaczyna się nowy ranek ---
+        currentDay++;
+        moneyAtStartOfDay = currentMoney; // Zapamiętujemy nowy punkt startowy by poprawnie wyliczyć procent profitu ZA JUTRO!
+        
+        // Sprzątamy UI
+        if (endOfDayPanel != null) endOfDayPanel.SetActive(false);
+        PlayerMovement.canMove = true; // Gracz może już chodzić rano i wychodzić do roboty
+        isTransitioning = false;
+    }
+}

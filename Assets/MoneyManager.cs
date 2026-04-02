@@ -23,8 +23,8 @@ public class MoneyManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // Opcjonalnie jeśli chcesz aby gotówka nie resetywała się co włączenie innej sceny w Unity odkomentuj:
-            // DontDestroyOnLoad(gameObject);
+            // Aby gotówka nie resetywała się co włączenie innej sceny w Unity odkomentowane
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
