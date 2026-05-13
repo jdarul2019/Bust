@@ -28,10 +28,10 @@ public class TravelMenu : MonoBehaviour
     {
         string currentScene = SceneManager.GetActiveScene().name;
 
-        // Włącz wszystkie, potem zablokuj aktualną i kasynową
+        // Włącz wszystkie, zablokuj tylko aktualną scenę
         SetButton(btnHome,   currentScene != SCENE_HOME,   "🏠  Home");
         SetButton(btnBar,    currentScene != SCENE_BAR,    "🍺  Bar");
-        SetButton(btnCasino, false,                        "🎰  Casino");  // zawsze zablokowane na razie
+        SetButton(btnCasino, currentScene != SCENE_CASINO, "🎰  Casino");
     }
 
     private void SetButton(Button btn, bool interactable, string label)

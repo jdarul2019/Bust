@@ -167,7 +167,7 @@ public class DiceGame : MonoBehaviour
                 }
             }
 
-            // Ostateczność, gdybyś rzeźbił pole w edytorze z byt małe i zapchał fizykiem stół do zera
+            // Ostateczność, gdybyś rzeźbił pole w edytorze zbyt małe i zapchał fizykiem stół do zera
             if (!foundSpot)
             {
                 safePositionsCache[i] = new Vector2(Random.Range(-50f, 50f), Random.Range(-50f, 50f));
@@ -309,7 +309,7 @@ public class DiceGame : MonoBehaviour
         }
         else
         {
-            msg = "<color=red>You lose to Casino...</color>\nYou lose " + betAmount + "$";
+            msg = "<color=red>Lose</color>\nYou lose " + betAmount + "$";
         }
 
         if (winAmount > 0 && MoneyManager.Instance != null)
