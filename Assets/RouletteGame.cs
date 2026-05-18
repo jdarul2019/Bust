@@ -249,7 +249,7 @@ public class RouletteGame : MonoBehaviour
         if (btnContinue) btnContinue.gameObject.SetActive(false);
 
         RefreshUI();
-        resultText.text = "Spinning...";
+        resultText.text = "";
 
         // LOSUJEMY WYNIK OD RAZU, ABY WIEDZIEĆ GDZIE ZATRZYMAĆ KULKĘ
         int result = Random.Range(0, 37); // 0–36
@@ -318,12 +318,18 @@ public class RouletteGame : MonoBehaviour
         string color = result == 0        ? "🟢"
                      : RED.Contains(result) ? "🔴" : "⚫";
 
-        int winnings = CalculateWinnings(result);
+        string breakdown;
+        int winnings = CalculateWinnings(result, out breakdown);
         if (winnings > 0) MoneyManager.Instance.AddMoney(winnings);
 
-        resultText.text = winnings > 0
-            ? $"Result: {result} {color}\n✅ You won ${winnings}!"
-            : $"Result: {result} {color}\n❌ Better luck next time...";
+        if (winnings > 0)
+        {
+            resultText.text = $"<b>Winning Bets:</b>\n{breakdown}\n\n✅ <b>Total Won: ${winnings}</b>!";
+        }
+        else
+        {
+            resultText.text = $"❌ Better luck next time...";
+        }
 
         // Jeśli przypisano przycisk Continue to go pokazujemy, w przeciwnym razie resetujemy grę autoamtycznie
         if (btnContinue != null)
@@ -347,7 +353,7 @@ public class RouletteGame : MonoBehaviour
 
         bets.Clear();
         isSpinning = false;
-        resultText.text = "Place your bets...";
+        resultText.text = "";
         RefreshUI();
     }
 
@@ -355,15 +361,42 @@ public class RouletteGame : MonoBehaviour
     // BET PAYOUTS
     // ══════════════════════════════════════════════════════════════
 
-    private int CalculateWinnings(int result)
+    private int CalculateWinnings(int result, out string breakdown)
     {
         int total = 0;
+        List<string> details = new List<string>();
         foreach (var bet in bets)
         {
             if (BetHits(bet.Key, result))
-                total += bet.Value * GetMultiplier(bet.Key);
+            {
+                int wonAmount = bet.Value * GetMultiplier(bet.Key);
+                total += wonAmount;
+                details.Add($"• {GetZoneFriendlyName(bet.Key)}: <color=green>+${wonAmount}</color>");
+            }
         }
+        breakdown = string.Join("\n", details);
         return total;
+    }
+
+    private string GetZoneFriendlyName(string zone)
+    {
+        if (zone.StartsWith("num_")) return $"Number {zone.Substring(4)}";
+        return zone switch
+        {
+            "red" => "Red",
+            "black" => "Black",
+            "even" => "Even",
+            "odd" => "Odd",
+            "1to18" => "1 to 18",
+            "19to36" => "19 to 36",
+            "1st12" => "1st 12",
+            "2nd12" => "2nd 12",
+            "3rd12" => "3rd 12",
+            "row1" => "Top Row (2/1)",
+            "row2" => "Middle Row (2/1)",
+            "row3" => "Bottom Row (2/1)",
+            _ => zone
+        };
     }
 
     private bool BetHits(string zone, int result)
@@ -426,7 +459,7 @@ public class RouletteGame : MonoBehaviour
         PlayerMovement.canMove = true;
         ResetAllBets();
         ClearBet();
-        if (resultText != null) resultText.text = "Place your bets...";
+        if (resultText != null) resultText.text = "";
         CloseInstruction();
         gameObject.SetActive(false);
     }
