@@ -237,10 +237,11 @@ public class BlackjackGame : MonoBehaviour
         UpdateUIButtons();
 
         int pScore = CalculateScore(playerHand);
-        if (pScore == 21)
+        int dScore = CalculateScore(dealerHand);
+        
+        if (pScore == 21 || dScore == 21)
         {
-            // Jeśli gracz ma naturalnego Blackjacka z dwóch kart, krupier tylko sprawdza swoją kartę.
-            // Nie dobiera nowych kart do 17, bo nie da mu to wygranej z naturalnym 21.
+            // Jeśli gracz LUB krupier ma naturalnego Blackjacka z dwóch kart, gra kończy się natychmiastowo.
             RevealDealerCard();
             ResolveGame();
         }
