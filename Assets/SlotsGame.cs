@@ -30,8 +30,23 @@ public class SlotsGame : MonoBehaviour
     [Header("Instruction Panel")]
     public GameObject instructionPanel;
 
-    // Statyczny Pula Progresywnego Jackpota
-    private static int progressiveJackpot = 0;
+    // Słownik przechowujący pule Jackpot dla każdej sceny z osobna (Rozwiązuje konflikt Kasyno/Bar)
+    private static System.Collections.Generic.Dictionary<string, int> sceneJackpots = new System.Collections.Generic.Dictionary<string, int>();
+
+    private int progressiveJackpot
+    {
+        get
+        {
+            string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            if (!sceneJackpots.ContainsKey(sceneName)) sceneJackpots[sceneName] = 0;
+            return sceneJackpots[sceneName];
+        }
+        set
+        {
+            string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            sceneJackpots[sceneName] = value;
+        }
+    }
     
     // Statusy maszyny
     private int currentBet = 0;
