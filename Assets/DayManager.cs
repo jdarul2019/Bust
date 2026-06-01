@@ -14,6 +14,11 @@ public class DayManager : MonoBehaviour
     private int currentDay = 1;
     private int moneyAtStartOfDay = 0;
     private bool isTransitioning = false;
+    
+    [Header("End Game UI")]
+    public GameObject finalResultPanel;
+    public TextMeshProUGUI finalResultTitle;
+    public TextMeshProUGUI finalResultDesc;
 
     private void Awake()
     {
@@ -43,6 +48,18 @@ public class DayManager : MonoBehaviour
     public void FinishDay(GameObject panel, TextMeshProUGUI txtDay, TextMeshProUGUI txtProfit)
     {
         if (isTransitioning) return;
+        
+        // Zabezpieczenie braku energii i braku pieniędzy - omdlenie
+        // Jeśli kończymy dzień, a gracz nie ma pieniędzy (a w Story nie jest to wyłapane od razu)
+        if (MoneyManager.Instance != null && MoneyManager.Instance.GetBalance() <= 0)
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.TriggerGameOver("You went bankrupt! No money left to play.");
+                return;
+            }
+        }
+
         StartCoroutine(EndDayRoutine(panel, txtDay, txtProfit));
     }
 
@@ -88,6 +105,28 @@ public class DayManager : MonoBehaviour
         // Odczekaj podany czas wyświetlając ekran (aby gracz mógł się mu rzetelnie przyjrzeć uff)
         yield return new WaitForSeconds(showScreenDuration);
 
+        // --- SPRAWDZENIE KRYTYCZNE DŁUGU (Tylko w trybie Campaign) ---
+        if (GameManager.Instance != null && GameManager.Instance.currentMode == GameMode.Campaign)
+        {
+            if (currentDay == 7)
+            {
+                if (endOfDayPanel != null) endOfDayPanel.SetActive(false); // Chowamy dzienny
+                
+                int requiredDebt = GameManager.Instance.debtAmount;
+                if (currentMoney >= requiredDebt)
+                {
+                    // Odciągamy dług z konta (opcjonalnie dla fabuły)
+                    MoneyManager.Instance.SpendMoney(requiredDebt);
+                    GameManager.Instance.TriggerVictory($"You successfully paid the ${requiredDebt} debt! The mafia is off your back.");
+                }
+                else
+                {
+                    GameManager.Instance.TriggerGameOver($"You failed to collect ${requiredDebt} by Day 7. The mafia has found you...");
+                }
+                yield break; // Zakończ procedurę, jesteśmy na ekranie końcowym
+            }
+        }
+
         // Śpimy: Resetowanie energii po nocy do totalnego punktu pod korek
         if (EnergyManager.Instance != null)
         {
@@ -103,5 +142,27 @@ public class DayManager : MonoBehaviour
         if (endOfDayPanel != null) endOfDayPanel.SetActive(false);
         PlayerMovement.canMove = true; // Gracz może już chodzić rano i wychodzić do roboty
         isTransitioning = false;
+    }
+
+    // Metoda wywoływana przez GameManager
+    public void ShowEndGameScreen(bool isVictory, string description)
+    {
+        if (finalResultPanel != null)
+        {
+            finalResultPanel.SetActive(true);
+            
+            if (finalResultTitle != null)
+            {
+                finalResultTitle.text = isVictory ? "<color=green>YOU SURVIVED!</color>" : "<color=red>BUSTED!</color>";
+            }
+            if (finalResultDesc != null)
+            {
+                finalResultDesc.text = description;
+            }
+        }
+        else
+        {
+            Debug.LogError("Brak podpiętego Final Result Panel w DayManagerze!");
+        }
     }
 }
