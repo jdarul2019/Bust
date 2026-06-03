@@ -37,7 +37,7 @@ public class BlackjackGame : MonoBehaviour
     public Button btnHit;
     public Button btnStand;
     public Button btnDoubleDown;
-    public Button btnSplit; // Nowy przycisk Split
+    public Button btnSplit;
 
     [Header("UI - Stół (Jeden Widok)")]
     public Transform playerHandContainer; 
