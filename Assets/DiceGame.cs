@@ -199,9 +199,9 @@ public class DiceGame : MonoBehaviour
 
         while (elapsed < dealerSpinTime)
         {
-            if (dealerDice.Length > 0 && dealerDice[0] != null) ShuffleDie(dealerDice[0], safePositionsCache[0], out d1);
-            if (dealerDice.Length > 1 && dealerDice[1] != null) ShuffleDie(dealerDice[1], safePositionsCache[1], out d2);
-            if (dealerDice.Length > 2 && dealerDice[2] != null) ShuffleDie(dealerDice[2], safePositionsCache[2], out d3);
+            if (dealerDice.Length > 0 && dealerDice[0] != null) ShuffleDie(dealerDice[0], safePositionsCache[0], out d1, false);
+            if (dealerDice.Length > 1 && dealerDice[1] != null) ShuffleDie(dealerDice[1], safePositionsCache[1], out d2, false);
+            if (dealerDice.Length > 2 && dealerDice[2] != null) ShuffleDie(dealerDice[2], safePositionsCache[2], out d3, false);
             
             yield return new WaitForSeconds(tickSpeed);
             elapsed += tickSpeed;
@@ -237,9 +237,9 @@ public class DiceGame : MonoBehaviour
 
         while (elapsed < playerSpinTime)
         {
-            if (playerDice.Length > 0 && playerDice[0] != null) ShuffleDie(playerDice[0], safePositionsCache[3], out p1);
-            if (playerDice.Length > 1 && playerDice[1] != null) ShuffleDie(playerDice[1], safePositionsCache[4], out p2);
-            if (playerDice.Length > 2 && playerDice[2] != null) ShuffleDie(playerDice[2], safePositionsCache[5], out p3);
+            if (playerDice.Length > 0 && playerDice[0] != null) ShuffleDie(playerDice[0], safePositionsCache[3], out p1, true);
+            if (playerDice.Length > 1 && playerDice[1] != null) ShuffleDie(playerDice[1], safePositionsCache[4], out p2, true);
+            if (playerDice.Length > 2 && playerDice[2] != null) ShuffleDie(playerDice[2], safePositionsCache[5], out p3, true);
             
             yield return new WaitForSeconds(tickSpeed);
             elapsed += tickSpeed;
@@ -260,9 +260,9 @@ public class DiceGame : MonoBehaviour
     }
 
     // Mikser odpowiedzialny za wizualny "TUMBLE" kości w fazie lotu - symuluje mocne uderzanie w pole
-    private void ShuffleDie(Image dieImage, Vector2 targetStableBase, out int valueOut)
+    private void ShuffleDie(Image dieImage, Vector2 targetStableBase, out int valueOut, bool isPlayerRoll)
     {
-        dieImage.sprite = GetRandomDice(out valueOut);
+        dieImage.sprite = GetRandomDice(out valueOut, isPlayerRoll);
 
         // Symulacja podskakiwania i trzęsienia się kości przed zatrzymaniem
         Vector2 randomRumbleOffset = new Vector2(Random.Range(-15f, 15f), Random.Range(-15f, 15f));
@@ -320,9 +320,33 @@ public class DiceGame : MonoBehaviour
         if (resultText != null) resultText.text = msg;
     }
 
-    private Sprite GetRandomDice(out int value)
+    private Sprite GetRandomDice(out int value, bool isPlayerRoll)
     {
         int index = Random.Range(0, 6);
+
+        // Wpływ szczęścia (Alkohol) - działa tylko na rzuty gracza
+        if (isPlayerRoll && AlcoholManager.Instance != null)
+        {
+            float luck = AlcoholManager.Instance.GetLuckModifier();
+            if (luck > 0f)
+            {
+                // Dodatnie szczęście - szansa na przerzucenie bardzo słabego rzutu
+                if (index < 2 && Random.value < luck * 2.5f) // luck 0.2 to 50% szans
+                {
+                    index = Random.Range(2, 6); // Zmiana na (3-6)
+                }
+            }
+            else if (luck < 0f)
+            {
+                // Ujemne szczęście - szansa na popsucie dobrego rzutu
+                float badLuckChance = Mathf.Abs(luck);
+                if (index >= 3 && Random.value < badLuckChance) // bad luck 0.8 to 80% szans
+                {
+                    index = Random.Range(0, 3); // Zmiana na (1-3)
+                }
+            }
+        }
+
         value = index + 1;
         if (diceFaces != null && diceFaces.Length > index) return diceFaces[index];
         return null;

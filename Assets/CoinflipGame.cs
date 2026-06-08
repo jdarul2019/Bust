@@ -190,9 +190,27 @@ public class CoinflipGame : MonoBehaviour
             coinTransform.anchoredPosition = new Vector2(losoweX, losoweY);
         }
 
-        // Losowanko: 0 to Orzeł (Heads), 1 to Reszka (Tails)
-        int randomResult = Random.Range(0, 2);
-        CoinSide flippedSide = (randomResult == 0) ? CoinSide.Heads : CoinSide.Tails;
+        // Losowanko i wpływ Alkoholu na szanse
+        float winChance = 0.5f;
+        if (AlcoholManager.Instance != null)
+        {
+            winChance += AlcoholManager.Instance.GetLuckModifier();
+        }
+
+        float roll = Random.Range(0f, 1f);
+        CoinSide flippedSide;
+        
+        if (roll <= winChance)
+        {
+            // Szczęście dopisało - wypadło to, co wytypowano
+            flippedSide = selectedSide;
+        }
+        else
+        {
+            // Przegrana - wypadło przeciwieństwo
+            flippedSide = (selectedSide == CoinSide.Heads) ? CoinSide.Tails : CoinSide.Heads;
+        }
+
         string flippedSideName = (flippedSide == CoinSide.Heads) ? "Heads" : "Tails";
 
         // Zmiana grafiki (obrazka) monety w zależności od tego, co wypadło

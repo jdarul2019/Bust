@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8425458043667035327}
   - component: {fileID: 1042724739408114260}
   - component: {fileID: 8698122377116593723}
+  - component: {fileID: 3757280483570522639}
   m_Layer: 0
   m_Name: gameManager
   m_TagString: Untagged
@@ -72,7 +73,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51c0ee6ea057444bae32bc4eadadedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayManager
-  endOfDayPanel: {fileID: 0}
-  dayText: {fileID: 0}
-  profitText: {fileID: 0}
   showScreenDuration: 3
+  finalResultPanel: {fileID: 0}
+  finalResultTitle: {fileID: 0}
+  finalResultDesc: {fileID: 0}
+--- !u!114 &3757280483570522639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356007030971234070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7388c42b2536c9e4386bf4f5c6e427db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AlcoholManager

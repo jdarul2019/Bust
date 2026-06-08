@@ -200,15 +200,41 @@ public class SlotsGame : MonoBehaviour
     // Zaktualizowany silnik losujący korzystający z dociążeń w tabeli WAG
     private Sprite GetRandomSymbol(out int index)
     {
+        int[] currentWeights = (int[])symbolWeights.Clone();
+        
+        // Modyfikacja wag na podstawie szczęścia (Alkohol)
+        if (AlcoholManager.Instance != null)
+        {
+            float luck = AlcoholManager.Instance.GetLuckModifier();
+            if (luck > 0f)
+            {
+                // Zwiększamy wagi najlepszych: 0 (Diament), 1 (7), 3 (Wild)
+                currentWeights[0] += Mathf.CeilToInt(luck * 30);
+                currentWeights[1] += Mathf.CeilToInt(luck * 30);
+                currentWeights[3] += Mathf.CeilToInt(luck * 30);
+            }
+            else if (luck < 0f)
+            {
+                // Zwiększamy wagi najgorszych "zapychaczy" i zmniejszamy dobrych
+                float badLuck = Mathf.Abs(luck); // 0.8 to maks
+                currentWeights[2] += Mathf.CeilToInt(badLuck * 80); // Wiśnia
+                currentWeights[4] += Mathf.CeilToInt(badLuck * 60); // Pomarańcza
+                currentWeights[5] += Mathf.CeilToInt(badLuck * 60); // Winogrono
+                
+                currentWeights[0] = Mathf.Max(1, currentWeights[0] - Mathf.CeilToInt(badLuck * 15)); // Diament
+                currentWeights[3] = Mathf.Max(1, currentWeights[3] - Mathf.CeilToInt(badLuck * 15)); // Wild
+            }
+        }
+
         int totalWeight = 0;
-        for (int i = 0; i < symbolWeights.Length; i++) totalWeight += symbolWeights[i];
+        for (int i = 0; i < currentWeights.Length; i++) totalWeight += currentWeights[i];
         
         int randomVal = Random.Range(0, totalWeight);
         int currentWeight = 0;
         
-        for (int i = 0; i < symbolWeights.Length; i++)
+        for (int i = 0; i < currentWeights.Length; i++)
         {
-            currentWeight += symbolWeights[i];
+            currentWeight += currentWeights[i];
             if (randomVal < currentWeight)
             {
                 index = i;

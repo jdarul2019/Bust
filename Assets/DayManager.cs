@@ -134,6 +134,12 @@ public class DayManager : MonoBehaviour
             EnergyManager.Instance.AddEnergy(maxEnergy); // Skrypt z energii samoistnie pilnuje obcięcia przy szczytowych wartościach
         }
 
+        // Śpimy: Resetowanie poziomu alkoholu do zera
+        if (AlcoholManager.Instance != null)
+        {
+            AlcoholManager.Instance.ResetAlcohol();
+        }
+
         // --- Zaczyna się nowy ranek ---
         currentDay++;
         moneyAtStartOfDay = currentMoney; // Zapamiętujemy nowy punkt startowy by poprawnie wyliczyć procent profitu ZA JUTRO!

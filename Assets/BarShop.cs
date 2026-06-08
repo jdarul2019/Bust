@@ -6,6 +6,9 @@ public class BarShop : MonoBehaviour
     [Header("Ustawienia Sklepu")]
     public int drinkCost = 20;
     public int energyAmount = 30;
+    
+    public int alcoholCost = 15;
+    public int alcoholAmount = 1;
 
     [Header("UI & Interakcja")]
     public GameObject dymek; // Dymek pokazujący przycisk interakcji np. 'E'
@@ -75,6 +78,26 @@ public class BarShop : MonoBehaviour
         else
         {
             if (resultText != null) resultText.text = "Not enough money! (" + drinkCost + "$)";
+        }
+    }
+
+    // Ta funkcja będzie podpięta pod przycisk "Kup Alkohol" w UI
+    public void BuyAlcoholDrink()
+    {
+        if (MoneyManager.Instance == null || AlcoholManager.Instance == null)
+        {
+            Debug.LogWarning("Missing MoneyManager or AlcoholManager in the scene!");
+            return;
+        }
+
+        if (MoneyManager.Instance.SpendMoney(alcoholCost))
+        {
+            AlcoholManager.Instance.AddAlcohol(alcoholAmount);
+            if (resultText != null) resultText.text = "Alcohol drink purchased! You feel a bit braver...";
+        }
+        else
+        {
+            if (resultText != null) resultText.text = "Not enough money! (" + alcoholCost + "$)";
         }
     }
 
