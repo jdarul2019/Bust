@@ -7,7 +7,7 @@ public class BarShop : MonoBehaviour
     public int drinkCost = 20;
     public int energyAmount = 30;
     
-    public int alcoholCost = 15;
+    public int alcoholCost = 50;
     public int alcoholAmount = 1;
 
     [Header("UI & Interakcja")]
