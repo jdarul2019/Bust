@@ -74,4 +74,10 @@ public class MoneyManager : MonoBehaviour
     {
         return currentMoney;
     }
+
+    public void ResetMoney()
+    {
+        currentMoney = startingMoney;
+        OnMoneyChanged?.Invoke(currentMoney);
+    }
 }

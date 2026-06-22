@@ -73,4 +73,10 @@ public class EnergyManager : MonoBehaviour
     {
         return maxEnergy;
     }
+
+    public void ResetEnergy()
+    {
+        currentEnergy = maxEnergy;
+        OnEnergyChanged?.Invoke(currentEnergy, maxEnergy);
+    }
 }

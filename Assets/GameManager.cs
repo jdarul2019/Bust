@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     [Tooltip("Amount needed to pay off the mafia at Day 7 (Campaign only)")]
     public int debtAmount = 10000;
 
+    [Tooltip("Czy gracz posiada garnitur (wymagany do kasyna w Story Mode)")]
+    public bool hasSuit = false;
+
     private void Awake()
     {
         if (Instance == null)
@@ -46,5 +49,14 @@ public class GameManager : MonoBehaviour
         {
             DayManager.Instance.ShowEndGameScreen(true, reasonText);
         }
+    }
+
+    public void ResetAllManagers()
+    {
+        hasSuit = false;
+        if (MoneyManager.Instance != null) MoneyManager.Instance.ResetMoney();
+        if (EnergyManager.Instance != null) EnergyManager.Instance.ResetEnergy();
+        if (AlcoholManager.Instance != null) AlcoholManager.Instance.ResetAlcohol();
+        if (DayManager.Instance != null) DayManager.Instance.ResetDays();
     }
 }

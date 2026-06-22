@@ -171,4 +171,17 @@ public class DayManager : MonoBehaviour
             Debug.LogError("Brak podpiętego Final Result Panel w DayManagerze!");
         }
     }
+
+    public void ResetDays()
+    {
+        currentDay = 1;
+        if (MoneyManager.Instance != null)
+        {
+            moneyAtStartOfDay = MoneyManager.Instance.GetBalance();
+        }
+        else
+        {
+            moneyAtStartOfDay = 0;
+        }
+    }
 }

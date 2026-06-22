@@ -7,6 +7,9 @@ public class BarShop : MonoBehaviour
     public int drinkCost = 20;
     public int energyAmount = 30;
     
+    public int coffeeCost = 10;
+    public int coffeeEnergyAmount = 15;
+
     public int alcoholCost = 50;
     public int alcoholAmount = 1;
 
@@ -78,6 +81,32 @@ public class BarShop : MonoBehaviour
         else
         {
             if (resultText != null) resultText.text = "Not enough money! (" + drinkCost + "$)";
+        }
+    }
+
+    // Ta funkcja będzie podpięta pod przycisk "Kup Kawę" w UI
+    public void BuyCoffeeDrink()
+    {
+        if (MoneyManager.Instance == null || EnergyManager.Instance == null)
+        {
+            Debug.LogWarning("Missing MoneyManager or EnergyManager in the scene!");
+            return;
+        }
+
+        if (EnergyManager.Instance.GetEnergy() >= EnergyManager.Instance.GetMaxEnergy())
+        {
+            if (resultText != null) resultText.text = "You already have max energy!";
+            return;
+        }
+
+        if (MoneyManager.Instance.SpendMoney(coffeeCost))
+        {
+            EnergyManager.Instance.AddEnergy(coffeeEnergyAmount);
+            if (resultText != null) resultText.text = "Coffee purchased! +" + coffeeEnergyAmount + " Energy";
+        }
+        else
+        {
+            if (resultText != null) resultText.text = "Not enough money! (" + coffeeCost + "$)";
         }
     }
 

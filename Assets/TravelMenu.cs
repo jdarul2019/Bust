@@ -9,6 +9,7 @@ public class TravelMenu : MonoBehaviour
     public Button btnHome;
     public Button btnBar;
     public Button btnCasino;
+    public Button btnMainMenu;
 
     [Header("Referencja do DoorTrigger (do zamknięcia menu)")]
     public DoorTrigger doorTrigger;
@@ -17,6 +18,7 @@ public class TravelMenu : MonoBehaviour
     private const string SCENE_BAR    = "barScene";
     private const string SCENE_HOME   = "roomScene";
     private const string SCENE_CASINO = "casinoScene";
+    private const string SCENE_MAINMENU = "MainMenu";
 
     void OnEnable()
     {
@@ -28,10 +30,24 @@ public class TravelMenu : MonoBehaviour
     {
         string currentScene = SceneManager.GetActiveScene().name;
 
+        bool canGoHome = currentScene != SCENE_HOME;
+        bool canGoBar = currentScene != SCENE_BAR;
+        bool canGoCasino = currentScene != SCENE_CASINO;
+
+        if (GameManager.Instance != null && GameManager.Instance.currentMode == GameMode.Campaign && !GameManager.Instance.hasSuit)
+        {
+            canGoCasino = false;
+        }
+
         // Włącz wszystkie, zablokuj tylko aktualną scenę
-        SetButton(btnHome,   currentScene != SCENE_HOME,   "🏠  Home");
-        SetButton(btnBar,    currentScene != SCENE_BAR,    "🍺  Bar");
-        SetButton(btnCasino, currentScene != SCENE_CASINO, "🎰  Casino");
+        SetButton(btnHome,   canGoHome,   "Home");
+        SetButton(btnBar,    canGoBar,    "Bar");
+        
+        string casinoLabel = (GameManager.Instance != null && GameManager.Instance.currentMode == GameMode.Campaign && !GameManager.Instance.hasSuit) 
+                             ? "Casino (Brak garnituru)" 
+                             : "Casino";
+        SetButton(btnCasino, canGoCasino, casinoLabel);
+        SetButton(btnMainMenu, currentScene != SCENE_MAINMENU, "Main Menu");
     }
 
     private void SetButton(Button btn, bool interactable, string label)
@@ -42,7 +58,10 @@ public class TravelMenu : MonoBehaviour
         // Opcjonalne: przyciemnij tekst na zablokowanym przycisku
         var tmp = btn.GetComponentInChildren<TextMeshProUGUI>();
         if (tmp != null)
+        {
             tmp.color = interactable ? Color.white : new Color(0.5f, 0.5f, 0.5f, 1f);
+            tmp.text = label;
+        }
     }
 
     // ============================================
@@ -51,6 +70,7 @@ public class TravelMenu : MonoBehaviour
     public void GoHome()    => TravelTo(SCENE_HOME);
     public void GoBar()     => TravelTo(SCENE_BAR);
     public void GoCasino()  => TravelTo(SCENE_CASINO);
+    public void GoMainMenu()=> TravelTo(SCENE_MAINMENU);
 
     private void TravelTo(string sceneName)
     {

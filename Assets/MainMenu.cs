@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.currentMode = GameMode.Campaign;
+            GameManager.Instance.ResetAllManagers();
         }
         LoadGame();
     }
@@ -21,6 +22,7 @@ public class MainMenu : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.currentMode = GameMode.Endless;
+            GameManager.Instance.ResetAllManagers();
         }
         LoadGame();
     }
