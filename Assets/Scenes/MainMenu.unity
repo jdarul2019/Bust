@@ -1397,7 +1397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   currentMode: 0
-  debtAmount: 10000
+  debtAmount: 25000
+  hasSuit: 0
 --- !u!4 &1973254947
 Transform:
   m_ObjectHideFlags: 0

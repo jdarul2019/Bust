@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public GameMode currentMode = GameMode.Campaign;
 
     [Tooltip("Amount needed to pay off the mafia at Day 7 (Campaign only)")]
-    public int debtAmount = 10000;
+    public int debtAmount = 25000;
 
     [Tooltip("Czy gracz posiada garnitur (wymagany do kasyna w Story Mode)")]
     public bool hasSuit = false;
