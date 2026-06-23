@@ -14437,6 +14437,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5542097716479499693, guid: c0bd4fd29f7c92940a38f587b8133b7f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542097716479499693, guid: c0bd4fd29f7c92940a38f587b8133b7f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542097716479499693, guid: c0bd4fd29f7c92940a38f587b8133b7f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5542097716479499693, guid: c0bd4fd29f7c92940a38f587b8133b7f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -14488,7 +14500,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: money/energy
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7193524248786088986, guid: c0bd4fd29f7c92940a38f587b8133b7f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -90591,8 +90604,8 @@ SceneRoots:
   - {fileID: 1996216568}
   - {fileID: 1086697450}
   - {fileID: 524905071}
-  - {fileID: 297315558}
   - {fileID: 9429701}
+  - {fileID: 297315558}
   - {fileID: 614498971}
   - {fileID: 945845839}
   - {fileID: 1851379859}
