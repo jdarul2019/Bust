@@ -28,8 +28,16 @@ public class LaptopShop : MonoBehaviour
 
         if (MoneyManager.Instance.SpendMoney(suitCost))
         {
+            // Oznaczamy w menedżerze, że mamy garnitur
             GameManager.Instance.hasSuit = true;
             if (resultText != null) resultText.text = "Zakupiono garnitur! Możesz teraz wejść do kasyna.";
+
+            // --- NOWE: Szukamy gracza na scenie i każemy mu założyć garnitur ---
+            PlayerMovement player = FindObjectOfType<PlayerMovement>();
+            if (player != null)
+            {
+                player.PutOnSuit();
+            }
         }
         else
         {

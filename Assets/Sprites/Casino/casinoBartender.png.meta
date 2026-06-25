@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 6cead490fbc61f04d8e17fc1ee6d288c
+guid: ce40aa31c6bec684d99c722f1dba27a7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4927246767025751070
-    second: sprPlayer_0
-  - first:
-      213: -5267191621245911261
-    second: sprPlayer_1
-  - first:
-      213: -8828048568382545969
-    second: sprPlayer_2
+      213: 5616790604594659764
+    second: casinoBartender_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,67 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprPlayer_0
+      name: casinoBartender_0
       rect:
         serializedVersion: 2
-        x: 8
+        x: 2
         y: 0
-        width: 16
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e14034534d8116440800000000000000
-      internalID: 4927246767025751070
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprPlayer_1
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 0
-        width: 16
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 32f39b3902d27e6b0800000000000000
-      internalID: -5267191621245911261
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprPlayer_2
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 0
-        width: 16
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fcf99ad99987c7580800000000000000
-      internalID: -8828048568382545969
+      spriteID: 4b1cd9cbb49d2fd40800000000000000
+      internalID: 5616790604594659764
       vertices: []
       indices: 
       edges: []
@@ -188,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 341d9ba2007d9214d960f1fd13532450
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -198,9 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      sprPlayer_0: 4927246767025751070
-      sprPlayer_1: -5267191621245911261
-      sprPlayer_2: -8828048568382545969
+      casinoBartender_0: 5616790604594659764
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

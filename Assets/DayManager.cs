@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DayManager : MonoBehaviour
 {
@@ -183,5 +184,15 @@ public class DayManager : MonoBehaviour
         {
             moneyAtStartOfDay = 0;
         }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        // Opcjonalnie: zresetuj stan gry przed wyjściem
+        Time.timeScale = 1f; 
+    
+        // Zakładając, że Twoja scena z menu nazywa się "MainMenu"
+        // Sprawdź w File -> Build Settings, czy nazwa jest identyczna!
+        SceneManager.LoadScene("MainMenu");
     }
 }
