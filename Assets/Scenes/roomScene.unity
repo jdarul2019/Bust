@@ -3231,6 +3231,10 @@ PrefabInstance:
       propertyPath: finalResultTitle
       value: 
       objectReference: {fileID: 1666000781}
+    - target: {fileID: 8698122377116593723, guid: 5bd00a2f187e7a74cb9aa99219d290ac, type: 3}
+      propertyPath: showScreenDuration
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -4340,7 +4344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &980866014
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5169,7 +5173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1108000384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7646,6 +7650,7 @@ GameObject:
   - component: {fileID: 1757636176}
   - component: {fileID: 1757636175}
   - component: {fileID: 1757636174}
+  - component: {fileID: 1757636177}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -7737,6 +7742,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1757636177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757636172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00dd7c40a3f2ea440aa92476c09d6b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalEndGameUI
+  finalResultPanel: {fileID: 980866013}
+  finalResultTitle: {fileID: 1666000781}
+  finalResultDesc: {fileID: 143850294}
 --- !u!1 &1764737426
 GameObject:
   m_ObjectHideFlags: 0
@@ -8202,8 +8222,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -592, y: 302}
-  m_SizeDelta: {x: 500, y: 300}
+  m_AnchoredPosition: {x: -448.91504, y: 302}
+  m_SizeDelta: {x: 786.1699, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1833893173
 MonoBehaviour:
