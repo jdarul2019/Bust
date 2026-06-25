@@ -154,17 +154,30 @@ public class DayManager : MonoBehaviour
     // Metoda wywoływana przez GameManager
     public void ShowEndGameScreen(bool isVictory, string description)
     {
+        Debug.Log("ShowEndGameScreen wywołane! isVictory: " + isVictory);
+        
         if (finalResultPanel != null)
         {
+            Debug.Log("finalResultPanel NIE jest null. Próbuję go aktywować...");
             finalResultPanel.SetActive(true);
+            Debug.Log("finalResultPanel.activeSelf to teraz: " + finalResultPanel.activeSelf + ", a w hierarchii (activeInHierarchy): " + finalResultPanel.activeInHierarchy);
             
             if (finalResultTitle != null)
             {
                 finalResultTitle.text = isVictory ? "<color=green>YOU SURVIVED!</color>" : "<color=red>BUSTED!</color>";
             }
+            else
+            {
+                Debug.LogWarning("finalResultTitle jest null, więc tytuł się nie zaktualizuje.");
+            }
+            
             if (finalResultDesc != null)
             {
                 finalResultDesc.text = description;
+            }
+            else
+            {
+                Debug.LogWarning("finalResultDesc jest null.");
             }
         }
         else
