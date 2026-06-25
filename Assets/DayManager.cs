@@ -173,6 +173,14 @@ public class DayManager : MonoBehaviour
         }
     }
 
+    // Pozwala na zaktualizowanie referencji do UI po załadowaniu nowej sceny
+    public void RegisterEndGameUI(GameObject panel, TextMeshProUGUI title, TextMeshProUGUI desc)
+    {
+        finalResultPanel = panel;
+        finalResultTitle = title;
+        finalResultDesc = desc;
+    }
+
     public void ResetDays()
     {
         currentDay = 1;
