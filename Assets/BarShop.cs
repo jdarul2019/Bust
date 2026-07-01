@@ -69,7 +69,7 @@ public class BarShop : MonoBehaviour
 
         if (EnergyManager.Instance.GetEnergy() >= EnergyManager.Instance.GetMaxEnergy())
         {
-            if (resultText != null) resultText.text = "You already have max energy!";
+            if (resultText != null) resultText.text = "You already have max energy";
             return;
         }
 
