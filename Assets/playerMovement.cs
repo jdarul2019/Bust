@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     
     // Globalna flaga pozwalająca włączać/wyłączać ruch z każdego innego skryptu na scenie
     public static bool canMove = true;
+    [Header("Skiny")]
+    public RuntimeAnimatorController suitAnimatorController;
 
     void Start()
     {
@@ -22,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
         // Reset ruchu przy każdym załadowaniu sceny —
         // static persystuje między scenami więc wymuszamy świeży start
         canMove = true;
+        if (GameManager.Instance != null && GameManager.Instance.hasSuit)
+        {
+            PutOnSuit();
+        }
     }
 
     void Update()
@@ -55,5 +61,13 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    public void PutOnSuit()
+    {
+        if (anim != null && suitAnimatorController != null)
+        {
+            anim.runtimeAnimatorController = suitAnimatorController;
+        }
     }
 }

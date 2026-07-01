@@ -44,7 +44,7 @@ public class TravelMenu : MonoBehaviour
         SetButton(btnBar,    canGoBar,    "Bar");
         
         string casinoLabel = (GameManager.Instance != null && GameManager.Instance.currentMode == GameMode.Campaign && !GameManager.Instance.hasSuit) 
-                             ? "Casino (Brak garnituru)" 
+                             ? "Casino (You need a suit)" 
                              : "Casino";
         SetButton(btnCasino, canGoCasino, casinoLabel);
         SetButton(btnMainMenu, currentScene != SCENE_MAINMENU, "Main Menu");
